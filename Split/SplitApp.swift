@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct SplitApp: App {
+    
+    @AppStorage("onboarding") var needsOnboarding = true
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            if needsOnboarding == true {
+                OnboardingView()
+            } else {
+                MainView()
+            }
         }
     }
 }
