@@ -16,6 +16,7 @@ struct MainView: View {
     @State private var selectedTab: String = "All"
     @State private var activeSegment: String = "Active"
     @State private var isCreateSplitPresented: Bool = false
+    @State private var splits: [Split] = []
     
     var body: some View {
         NavigationStack {
@@ -28,20 +29,31 @@ struct MainView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
-                Spacer()
-                
-                VStack {
-                    Image("iconsReceipt")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 200)
+                if splits.isEmpty {
+                    Spacer()
+                    
+                    VStack {
+                        Image("iconsReceipt")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 200)
+                            .padding()
+                        Text("No Splits created yet")
+                            .font(.headline)
+                            .foregroundStyle(Color.gray)
+                    }
+                    
+                    Spacer()
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(splits) { split in
+                                SplitItemView(split: split)
+                            }
+                        }
                         .padding()
-                    Text("No Splits created yet")
-                        .font(.headline)
-                        .foregroundStyle(Color.gray)
+                    }
                 }
-                
-                Spacer()
                 
                 Button(action: {
                     isCreateSplitPresented = true
@@ -70,7 +82,7 @@ struct MainView: View {
                 }
             }
             .navigationDestination(isPresented: $isCreateSplitPresented) {
-                CreateNewSplitView()
+                CreateNewSplitView(splits: $splits)
             }
         }
     }

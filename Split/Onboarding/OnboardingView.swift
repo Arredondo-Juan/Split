@@ -13,7 +13,7 @@ struct OnboardingView: View {
     @State var selectedViewIndex = 0
     @AppStorage("onboarding") var needsOnboarding = true
     
-    let totalPages = 3  // Total number of onboarding pages
+    let totalPages = 3
     
     var body: some View {
         ZStack {
@@ -28,7 +28,7 @@ struct OnboardingView: View {
                 }
                 .tag(0)
                 
-                OnboardingDetailsView(imageName: "iconsReceipt2", headlineText: "Main text also goes here", subheadlineText: "Helper also goes here") {
+                OnboardingDetailsView(imageName: "iconsReceipt2", headlineText: "Second headline", subheadlineText: "Second subheadline") {
                     withAnimation {
                         selectedViewIndex = 2
                     }
@@ -37,7 +37,7 @@ struct OnboardingView: View {
                 }
                 .tag(1)
                 
-                OnboardingDetailsView(imageName: "iconsReceipt3", headlineText: "Main text goes here as well", subheadlineText: "Helper goes here as well") {
+                OnboardingDetailsView(imageName: "iconsReceipt3", headlineText: "Placeholder text 3", subheadlineText: "Placeholder subtext 3") {
                     withAnimation {
                         dismissOnboarding()
                     }

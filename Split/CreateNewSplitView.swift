@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CreateNewSplitView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var splits: [Split]
     @State private var eventName = ""
     @State private var numberOfParticipants = ""
     @State private var totalBillAmount = ""
@@ -108,7 +109,9 @@ struct CreateNewSplitView: View {
                         amountPerParticipant: calculateAmountPerParticipant(),
                         totalBillAmount: Double(totalBillAmount) ?? 0.0,
                         numberOfParticipants: Int(numberOfParticipants) ?? 0,
-                        tipPercentage: Int(tipPercentage) ?? 0
+                        tipPercentage: Int(tipPercentage) ?? 0,
+                        splits: $splits,
+                        isShare: selectedMode == 1
                     )
                 }
             }
@@ -125,5 +128,5 @@ struct CreateNewSplitView: View {
 }
 
 #Preview {
-    CreateNewSplitView()
+    CreateNewSplitView(splits: .constant([]))
 }

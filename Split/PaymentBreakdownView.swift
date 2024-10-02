@@ -13,6 +13,8 @@ struct PaymentBreakdownView: View {
     let totalBillAmount: Double
     let numberOfParticipants: Int
     let tipPercentage: Int
+    @Binding var splits: [Split]
+    let isShare: Bool
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -70,6 +72,14 @@ struct PaymentBreakdownView: View {
             Spacer()
             
             Button("Go to main") {
+                let newSplit = Split(
+                    eventName: eventName,
+                    totalAmount: totalBillAmount,
+                    amountPerParticipant: amountPerParticipant,
+                    isSplit: !isShare,
+                    participants: isShare ? (0..<numberOfParticipants).map { _ in String(UUID().uuidString.prefix(2)) } : nil
+                )
+                splits.append(newSplit)
                 presentationMode.wrappedValue.dismiss()
             }
             .frame(maxWidth: .infinity)
@@ -89,5 +99,13 @@ struct PaymentBreakdownView: View {
 }
 
 #Preview {
-    PaymentBreakdownView(eventName: "Friday Night Out", amountPerParticipant: 94.58, totalBillAmount: 567.5, numberOfParticipants: 6, tipPercentage: 15)
+    PaymentBreakdownView(
+        eventName: "Friday Night Out",
+        amountPerParticipant: 94.58,
+        totalBillAmount: 567.5,
+        numberOfParticipants: 6,
+        tipPercentage: 15,
+        splits: .constant([]),
+        isShare: false
+    )
 }

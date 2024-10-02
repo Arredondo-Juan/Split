@@ -15,6 +15,8 @@
 		DC1FB4762CACCDFE000FBB1E /* PaymentBreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FB4752CACCDFE000FBB1E /* PaymentBreakdownView.swift */; };
 		DC1FB4782CACCE16000FBB1E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FB4772CACCE16000FBB1E /* OnboardingView.swift */; };
 		DC1FB47A2CACCE24000FBB1E /* OnboardingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FB4792CACCE24000FBB1E /* OnboardingDetailsView.swift */; };
+		DCE5C5652CACF3E10045E1E5 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5C5642CACF3E10045E1E5 /* Split.swift */; };
+		DCE5C5672CACF76E0045E1E5 /* SplitItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5C5662CACF76E0045E1E5 /* SplitItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		DC1FB4752CACCDFE000FBB1E /* PaymentBreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentBreakdownView.swift; sourceTree = "<group>"; };
 		DC1FB4772CACCE16000FBB1E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DC1FB4792CACCE24000FBB1E /* OnboardingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDetailsView.swift; sourceTree = "<group>"; };
+		DCE5C5642CACF3E10045E1E5 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
+		DCE5C5662CACF76E0045E1E5 /* SplitItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				DC1FB4672CACCDA9000FBB1E /* MainView.swift */,
 				DC1FB4732CACCDEC000FBB1E /* CreateNewSplitView.swift */,
 				DC1FB4752CACCDFE000FBB1E /* PaymentBreakdownView.swift */,
+				DCE5C5642CACF3E10045E1E5 /* Split.swift */,
+				DCE5C5662CACF76E0045E1E5 /* SplitItemView.swift */,
 				DC1FB47B2CACCE2C000FBB1E /* Onboarding */,
 				DC1FB4692CACCDAE000FBB1E /* Assets.xcassets */,
 				DC1FB46B2CACCDAE000FBB1E /* Preview Content */,
@@ -157,9 +163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCE5C5652CACF3E10045E1E5 /* Split.swift in Sources */,
 				DC1FB47A2CACCE24000FBB1E /* OnboardingDetailsView.swift in Sources */,
 				DC1FB4682CACCDA9000FBB1E /* MainView.swift in Sources */,
 				DC1FB4742CACCDEC000FBB1E /* CreateNewSplitView.swift in Sources */,
+				DCE5C5672CACF76E0045E1E5 /* SplitItemView.swift in Sources */,
 				DC1FB4662CACCDA9000FBB1E /* SplitApp.swift in Sources */,
 				DC1FB4782CACCE16000FBB1E /* OnboardingView.swift in Sources */,
 				DC1FB4762CACCDFE000FBB1E /* PaymentBreakdownView.swift in Sources */,
