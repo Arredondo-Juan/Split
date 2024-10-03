@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct SplitApp: App {
-    
     @AppStorage("onboarding") var needsOnboarding = true
     
     var body: some Scene {
         WindowGroup {
-            if needsOnboarding == true {
-                OnboardingView()
-            } else {
-                MainView()
+            Group {
+                if needsOnboarding {
+                    OnboardingView()
+                } else {
+                    MainView()
+                }
             }
         }
+        .modelContainer(for: Split.self)
     }
 }

@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CreateNewSplitView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @Binding var splits: [Split]
+    @Environment(\.dismiss) var dismiss
+    var modelContext: ModelContext
+    
     @State private var eventName = ""
     @State private var numberOfParticipants = ""
     @State private var totalBillAmount = ""
@@ -28,24 +30,10 @@ struct CreateNewSplitView: View {
         Double(totalBillAmount) != nil &&
         Int(tipPercentage) != nil
     }
-
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.blue)
-                    }
-                    Spacer()
-                    Text("Create new split")
-                        .font(.headline)
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
                 Picker("Mode", selection: $selectedMode) {
                     Text("Split").tag(0)
                     Text("Share").tag(1)
@@ -103,19 +91,30 @@ struct CreateNewSplitView: View {
                 }
                 .disabled(!isFormValid)
                 .padding()
-                .navigationDestination(isPresented: $navigateToPaymentBreakdown) {
-                    PaymentBreakdownView(
-                        eventName: eventName,
-                        amountPerParticipant: calculateAmountPerParticipant(),
-                        totalBillAmount: Double(totalBillAmount) ?? 0.0,
-                        numberOfParticipants: Int(numberOfParticipants) ?? 0,
-                        tipPercentage: Int(tipPercentage) ?? 0,
-                        splits: $splits,
-                        isShare: selectedMode == 1
-                    )
-                }
             }
-            .navigationBarHidden(true)
+            .navigationTitle("Create new split")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button(action: {
+                                    dismiss()
+                                }) {
+                                    Image(systemName: "arrow.left")
+                                }
+                            }
+                        }
+            .navigationDestination(isPresented: $navigateToPaymentBreakdown) {
+                PaymentBreakdownView(
+                    eventName: eventName,
+                    amountPerParticipant: calculateAmountPerParticipant(),
+                    totalBillAmount: Double(totalBillAmount) ?? 0.0,
+                    numberOfParticipants: Int(numberOfParticipants) ?? 0,
+                    tipPercentage: Int(tipPercentage) ?? 0,
+                    modelContext: modelContext,
+                    isShare: selectedMode == 1,
+                    dismissAction: { dismiss() }
+                )
+            }
         }
     }
     
@@ -128,5 +127,5 @@ struct CreateNewSplitView: View {
 }
 
 #Preview {
-    CreateNewSplitView(splits: .constant([]))
+    CreateNewSplitView(modelContext: ModelContext(try! ModelContainer(for: Split.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))))
 }

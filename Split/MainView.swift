@@ -6,17 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
-    
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.customPurple]
-    }
+    @Environment(\.modelContext) private var modelContext
+    @Query private var splits: [Split]
     
     @State private var selectedTab: String = "All"
     @State private var activeSegment: String = "Active"
     @State private var isCreateSplitPresented: Bool = false
-    @State private var splits: [Split] = []
+    
+    var filteredSplits: [Split] {
+        splits.filter { split in
+            (selectedTab == "All" || (selectedTab == "Splits" && split.isSplit) || (selectedTab == "Shares" && !split.isSplit)) &&
+            (activeSegment == "Active" ? !split.isDone : split.isDone)
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -29,7 +34,7 @@ struct MainView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
-                if splits.isEmpty {
+                if filteredSplits.isEmpty {
                     Spacer()
                     
                     VStack {
@@ -45,14 +50,27 @@ struct MainView: View {
                     
                     Spacer()
                 } else {
-                    ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(splits) { split in
-                                SplitItemView(split: split)
-                            }
+                    List {
+                        ForEach(filteredSplits) { split in
+                            SplitItemView(split: split)
+                                .swipeActions(edge: .leading) {
+                                    Button {
+                                        split.isDone.toggle()
+                                    } label: {
+                                        Label("Done", systemImage: "checkmark")
+                                    }
+                                    .tint(.green)
+                                }
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        deleteSplit(split)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                         }
-                        .padding()
                     }
+                    .listStyle(PlainListStyle())
                 }
                 
                 Button(action: {
@@ -81,13 +99,18 @@ struct MainView: View {
                     .offset(y: 45)
                 }
             }
-            .navigationDestination(isPresented: $isCreateSplitPresented) {
-                CreateNewSplitView(splits: $splits)
+            .fullScreenCover(isPresented: $isCreateSplitPresented) {
+                CreateNewSplitView(modelContext: modelContext)
             }
         }
+    }
+    
+    private func deleteSplit(_ split: Split) {
+        modelContext.delete(split)
     }
 }
 
 #Preview {
     MainView()
+        .modelContainer(for: Split.self, inMemory: true)
 }
