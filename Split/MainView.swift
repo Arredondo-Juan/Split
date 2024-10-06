@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.customPurple]
+    }
     @Environment(\.modelContext) private var modelContext
     @Query private var splits: [Split]
     
@@ -41,7 +44,6 @@ struct MainView: View {
                         Image("iconsReceipt")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(height: 200)
                             .padding()
                         Text("No Splits created yet")
                             .font(.headline)

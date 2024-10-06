@@ -19,7 +19,9 @@ struct OnboardingView: View {
         ZStack {
             TabView(selection: $selectedViewIndex) {
                 
-                OnboardingDetailsView(imageName: "iconsCompoundInterests", headlineText: "Main text goes here", subheadlineText: "Helper goes here") {
+                OnboardingDetailsView(imageName: "iconsCompoundInterests",
+                                      headlineText: "Main text goes here",
+                                      subheadlineText: "Helper goes here") {
                     withAnimation {
                         selectedViewIndex = 1
                     }
@@ -28,7 +30,9 @@ struct OnboardingView: View {
                 }
                 .tag(0)
                 
-                OnboardingDetailsView(imageName: "iconsReceipt2", headlineText: "Second headline", subheadlineText: "Second subheadline") {
+                OnboardingDetailsView(imageName: "iconsReceipt2",
+                                      headlineText: "Second headline",
+                                      subheadlineText: "Second subheadline") {
                     withAnimation {
                         selectedViewIndex = 2
                     }
@@ -37,7 +41,9 @@ struct OnboardingView: View {
                 }
                 .tag(1)
                 
-                OnboardingDetailsView(imageName: "iconsReceipt3", headlineText: "Placeholder text 3", subheadlineText: "Placeholder subtext 3") {
+                OnboardingDetailsView(imageName: "iconsReceipt3",
+                                      headlineText: "Placeholder text 3",
+                                      subheadlineText: "Placeholder subtext 3") {
                     withAnimation {
                         dismissOnboarding()
                     }

@@ -35,7 +35,6 @@ struct OnboardingDetailsView: View {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-//                .frame(height: 200)  // Adjust height as needed
                 .padding(.horizontal, 40)
             
             Text(headlineText)
@@ -49,7 +48,7 @@ struct OnboardingDetailsView: View {
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-                .padding(.top, 8) // Space between headline and subheadline
+                .padding(.top, 8)
             
             Spacer()
             

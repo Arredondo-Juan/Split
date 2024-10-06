@@ -93,16 +93,16 @@ struct CreateNewSplitView: View {
                 .padding()
             }
             .navigationTitle("Create new split")
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button(action: {
-                                    dismiss()
-                                }) {
-                                    Image(systemName: "arrow.left")
-                                }
-                            }
-                        }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "arrow.left")
+                    }
+                }
+            }
             .navigationDestination(isPresented: $navigateToPaymentBreakdown) {
                 PaymentBreakdownView(
                     eventName: eventName,
