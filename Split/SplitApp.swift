@@ -22,6 +22,6 @@ struct SplitApp: App {
                 }
             }
         }
-        .modelContainer(for: Split.self)
+        .modelContainer(for: [Split.self, Participant.self, Expense.self])
     }
 }

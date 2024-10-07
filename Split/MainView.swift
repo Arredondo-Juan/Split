@@ -102,7 +102,7 @@ struct MainView: View {
                 }
             }
             .fullScreenCover(isPresented: $isCreateSplitPresented) {
-                CreateNewSplitView(modelContext: modelContext)
+                CreateNewSplitView(modelContext: _modelContext)
             }
         }
     }

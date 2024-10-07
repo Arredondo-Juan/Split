@@ -8,30 +8,25 @@
 import SwiftUI
 import SwiftData
 
-struct Participant: Identifiable {
-    let id = UUID()
-    let name: String
-    let initials: String
-    let color: Color
-}
-
 struct CreateNewSplitView: View {
     @Environment(\.dismiss) var dismiss
-    var modelContext: ModelContext
-    
+    @Environment(\.modelContext) var modelContext: ModelContext
+
     @State private var eventName = ""
     @State private var numberOfParticipants = ""
     @State private var totalBillAmount = ""
     @State private var tipPercentage = ""
     @State private var selectedCurrency = "USD"
     @State private var selectedMode = 0  // 0 = Split, 1 = Share
-    
+    @State private var eventId = UUID()
+
     @State private var participantName = ""
-    @State private var participants: [Participant] = []  // For adding participants in Share mode
+    @Query var participants: [Participant]  // Use SwiftData to manage participants
     @State private var navigateToPaymentBreakdown = false
-    
+    @State private var navigateToShareDetails = false
+
     let colors: [Color] = [.red, .blue, .green, .yellow, .purple, .orange]
-    
+
     var isFormValid: Bool {
         if selectedMode == 0 {
             return !eventName.isEmpty &&
@@ -45,7 +40,7 @@ struct CreateNewSplitView: View {
             return !eventName.isEmpty && !participants.isEmpty
         }
     }
-    
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -158,7 +153,11 @@ struct CreateNewSplitView: View {
                 
                 // Button action
                 Button(action: {
-                    navigateToPaymentBreakdown = true
+                    if selectedMode == 0 {
+                        navigateToPaymentBreakdown = true
+                    } else {
+                        navigateToShareDetails = true
+                    }
                 }) {
                     Text(selectedMode == 0 ? "Split" : "Create Share")
                         .frame(maxWidth: .infinity)
@@ -193,6 +192,9 @@ struct CreateNewSplitView: View {
                     dismissAction: { dismiss() }
                 )
             }
+            .navigationDestination(isPresented: $navigateToShareDetails) {
+                ShareDetailsView(eventName: eventName, eventId: eventId)
+            }
         }
     }
     
@@ -202,21 +204,33 @@ struct CreateNewSplitView: View {
             .compactMap { $0.first }
             .map { String($0) }
             .joined()
-        let color = colors.randomElement() ?? .gray
-        let newParticipant = Participant(name: participantName, initials: initials, color: color)
-        participants.append(newParticipant)
+        let colorHex = colors.randomElement()?.hexString ?? "#808080" // Default to gray if no color is selected
+        let newParticipant = Participant(name: participantName, initials: initials, colorHex: colorHex, eventId: eventId)
+        modelContext.insert(newParticipant)
         participantName = ""
     }
     
     // Function to calculate amount per participant in Split mode
     private func calculateAmountPerParticipant() -> Double {
         let billAmount = Double(totalBillAmount) ?? 0.0
-        let participants = Int(numberOfParticipants) ?? 1
+        let participantsCount = max(Int(numberOfParticipants) ?? 1, 1)
         let tipAmount = billAmount * (Double(tipPercentage) ?? 0.0) / 100
-        return (billAmount + tipAmount) / Double(participants)
+        return (billAmount + tipAmount) / Double(participantsCount)
     }
 }
 
-#Preview {
-    CreateNewSplitView(modelContext: ModelContext(try! ModelContainer(for: Split.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))))
+extension Color {
+    var hexString: String {
+        let components = UIColor(self).cgColor.components
+        let r: CGFloat = components?[0] ?? 0.0
+        let g: CGFloat = components?[1] ?? 0.0
+        let b: CGFloat = components?[2] ?? 0.0
+
+        let hexString = String.init(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
+        return hexString
+    }
 }
+
+//#Preview {
+//    CreateNewSplitView(modelContext: ModelContext(try! ModelContainer(for: Split.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))))
+//}

@@ -15,6 +15,9 @@
 		DC1FB4762CACCDFE000FBB1E /* PaymentBreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FB4752CACCDFE000FBB1E /* PaymentBreakdownView.swift */; };
 		DC1FB4782CACCE16000FBB1E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FB4772CACCE16000FBB1E /* OnboardingView.swift */; };
 		DC1FB47A2CACCE24000FBB1E /* OnboardingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1FB4792CACCE24000FBB1E /* OnboardingDetailsView.swift */; };
+		DC8859C12CB2399900A44787 /* ShareDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8859C02CB2399900A44787 /* ShareDetailsView.swift */; };
+		DC8859C32CB239DF00A44787 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8859C22CB239DF00A44787 /* AddExpenseView.swift */; };
+		DC8859C52CB24DAE00A44787 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8859C42CB24DAE00A44787 /* Participant.swift */; };
 		DCE5C5652CACF3E10045E1E5 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5C5642CACF3E10045E1E5 /* Split.swift */; };
 		DCE5C5672CACF76E0045E1E5 /* SplitItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5C5662CACF76E0045E1E5 /* SplitItemView.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +32,9 @@
 		DC1FB4752CACCDFE000FBB1E /* PaymentBreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentBreakdownView.swift; sourceTree = "<group>"; };
 		DC1FB4772CACCE16000FBB1E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DC1FB4792CACCE24000FBB1E /* OnboardingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDetailsView.swift; sourceTree = "<group>"; };
+		DC8859C02CB2399900A44787 /* ShareDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDetailsView.swift; sourceTree = "<group>"; };
+		DC8859C22CB239DF00A44787 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
+		DC8859C42CB24DAE00A44787 /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		DCE5C5642CACF3E10045E1E5 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
 		DCE5C5662CACF76E0045E1E5 /* SplitItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +72,9 @@
 				DC1FB4652CACCDA9000FBB1E /* SplitApp.swift */,
 				DC1FB4672CACCDA9000FBB1E /* MainView.swift */,
 				DC1FB4732CACCDEC000FBB1E /* CreateNewSplitView.swift */,
+				DC8859C02CB2399900A44787 /* ShareDetailsView.swift */,
+				DC8859C42CB24DAE00A44787 /* Participant.swift */,
+				DC8859C22CB239DF00A44787 /* AddExpenseView.swift */,
 				DC1FB4752CACCDFE000FBB1E /* PaymentBreakdownView.swift */,
 				DCE5C5642CACF3E10045E1E5 /* Split.swift */,
 				DCE5C5662CACF76E0045E1E5 /* SplitItemView.swift */,
@@ -164,11 +173,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE5C5652CACF3E10045E1E5 /* Split.swift in Sources */,
+				DC8859C12CB2399900A44787 /* ShareDetailsView.swift in Sources */,
 				DC1FB47A2CACCE24000FBB1E /* OnboardingDetailsView.swift in Sources */,
 				DC1FB4682CACCDA9000FBB1E /* MainView.swift in Sources */,
 				DC1FB4742CACCDEC000FBB1E /* CreateNewSplitView.swift in Sources */,
 				DCE5C5672CACF76E0045E1E5 /* SplitItemView.swift in Sources */,
 				DC1FB4662CACCDA9000FBB1E /* SplitApp.swift in Sources */,
+				DC8859C52CB24DAE00A44787 /* Participant.swift in Sources */,
+				DC8859C32CB239DF00A44787 /* AddExpenseView.swift in Sources */,
 				DC1FB4782CACCE16000FBB1E /* OnboardingView.swift in Sources */,
 				DC1FB4762CACCDFE000FBB1E /* PaymentBreakdownView.swift in Sources */,
 			);
