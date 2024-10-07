@@ -51,6 +51,11 @@ struct CreateNewSplitView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
+                .onChange(of: selectedMode) { oldValue, newValue in
+                    if newValue == 1 {
+                        eventId = UUID()  // Generate a new unique event ID for a new share
+                    }
+                }
                 
                 // Conditionally show fields based on the selected mode
                 if selectedMode == 0 {
@@ -121,9 +126,9 @@ struct CreateNewSplitView: View {
                         }
                         
                         // List of added participants
-                        if !participants.isEmpty {
+                        if !participants.filter({ $0.eventId == eventId }).isEmpty {
                             ScrollView {
-                                ForEach(participants) { participant in
+                                ForEach(participants.filter { $0.eventId == eventId }) { participant in
                                     HStack {
                                         Circle()
                                             .fill(participant.color)
